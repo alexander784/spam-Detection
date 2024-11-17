@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
-
+from sklearn.naive_bayes import MultinomialNB
 
 
 #data frame
@@ -21,5 +21,8 @@ cat = data['Category']
 
 
 cv = CountVectorizer(stop_words='english')
-cv.fit_transform(mess_train)
+features = cv.fit_transform(mess_train)
 
+##Create model
+model = MultinomialNB()
+model.fit(features, cat_train)
