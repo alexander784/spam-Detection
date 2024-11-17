@@ -2,14 +2,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
-
+import streamlit as st
 
 #data frame
 # Read the data
 data = pd.read_csv('/home/alexander/machine/spam/spam.csv')
 # Remove duplicates
 data.drop_duplicates(inplace=True)
-data['Category'] = data['Category'].replace(['han','spam'],['Not Spam','Spam'])
+data['Category'] = data['Category'].replace(['ham','spam'],['Not Spam','Spam'])
 
 
 # Categorize the data
@@ -39,8 +39,15 @@ def predict(message):
     result = model.predict(input_message)
     return result
 
-output = predict('Congratulation you won a lottery')
-print(output)
+st.header('Spam Detection')
+
+
+# output = predict('Congratulation you won a lottery')
+input_mess = st.text_input('Enter Message Heare')
+
+if st.button('Validate'):
+   output = predict(input_mess)
+   st.markdown(output)
 
 
 
