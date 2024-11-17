@@ -5,6 +5,7 @@ from sklearn.naive_bayes import MultinomialNB
 
 
 #data frame
+# Read the data
 data = pd.read_csv('/home/alexander/machine/spam/spam.csv')
 # Remove duplicates
 data.drop_duplicates(inplace=True)
@@ -29,6 +30,20 @@ model.fit(features, cat_train)
 
 # Test model
 features_test = cv.transform(mess_test)
+
 print(model.score(features_test,cat_test))
+
+# Predict the data
+def predict(message):
+    input_message = cv.transform([message]).toarray()
+    result = model.predict(input_message)
+    return result
+
+output = predict('Congratulation you won a lottery')
+print(output)
+
+
+
+
 
 
