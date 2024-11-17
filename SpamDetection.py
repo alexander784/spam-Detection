@@ -26,3 +26,9 @@ features = cv.fit_transform(mess_train)
 ##Create model
 model = MultinomialNB()
 model.fit(features, cat_train)
+
+# Test model
+features_test = cv.transform(mess_test)
+print(model.score(features_test,cat_test))
+
+
